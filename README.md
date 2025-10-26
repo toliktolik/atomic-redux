@@ -90,8 +90,7 @@ Explored multiple approaches before finding the winning strategy:
    - Functions emerged with high readability matching original intent
 
 ## 🎬 Demo Video Phase 0
-[[https://imgur.com/wNzfHSq]]
-<blockquote class="imgur-embed-pub" lang="en" data-id="a/wNzfHSq" data-context="false" ><a href="//imgur.com/a/wNzfHSq"></a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
+IMGUR: [[https://imgur.com/wNzfHSq]]
 
 
 
