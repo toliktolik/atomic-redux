@@ -88,6 +88,8 @@ Explored multiple approaches before finding the winning strategy:
    - MCP-guided function renaming based on behavior and context
    - Result: `HeavyWeaponApp_Constructor`, `WeaponSystem_Constructor`, `RenderingSystem_DrawEffects`
    - Functions emerged with high readability matching original intent
+  
+   [[https://imgur.com/wNzfHSq]]
 
 ### Phase 2: Multi-Instance Development (Day 2)
 
@@ -118,6 +120,8 @@ Explored multiple approaches before finding the winning strategy:
   - Another started editing Ghidra's C codebase instead of TypeScript
   - Random hallucinated values appeared as "fallbacks"
   - Project rules and conventions randomly ignored
+ 
+  [[https://www.youtube.com/watch?v=99UkiQiEeCw]]
 
 **The Lesson:** Context engineering must happen upfront, not reactively.
 
