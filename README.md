@@ -90,7 +90,7 @@ Explored multiple approaches before finding the winning strategy:
    - Functions emerged with high readability matching original intent
 
 ## 🎬 Demo Video Phase 0
-IMGUR: [[https://imgur.com/wNzfHSq]]
+IMGUR: [[ https://imgur.com/a/lVILP2b]]
 
 
 
