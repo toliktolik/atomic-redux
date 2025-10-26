@@ -88,8 +88,12 @@ Explored multiple approaches before finding the winning strategy:
    - MCP-guided function renaming based on behavior and context
    - Result: `HeavyWeaponApp_Constructor`, `WeaponSystem_Constructor`, `RenderingSystem_DrawEffects`
    - Functions emerged with high readability matching original intent
-  
-   [[https://imgur.com/wNzfHSq]]
+
+## 🎬 Demo Video Phase 0
+[[https://imgur.com/wNzfHSq]]
+<blockquote class="imgur-embed-pub" lang="en" data-id="a/wNzfHSq" data-context="false" ><a href="//imgur.com/a/wNzfHSq"></a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
+
+
 
 ### Phase 2: Multi-Instance Development (Day 2)
 
@@ -121,7 +125,11 @@ Explored multiple approaches before finding the winning strategy:
   - Random hallucinated values appeared as "fallbacks"
   - Project rules and conventions randomly ignored
  
-  [[https://www.youtube.com/watch?v=99UkiQiEeCw]]
+## 🎬 Demo Video
+
+[![Heavy Weapon Redux - AI-Assisted Reverse Engineering](https://img.youtube.com/vi/99UkiQiEeCw/maxresdefault.jpg)](https://www.youtube.com/watch?v=99UkiQiEeCw)
+
+*Click above to watch the full demo and development walkthrough*
 
 **The Lesson:** Context engineering must happen upfront, not reactively.
 
