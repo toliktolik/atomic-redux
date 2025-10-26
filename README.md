@@ -423,9 +423,6 @@ Open browser to `localhost:3000` and start playing!
 
 This project is primarily a proof-of-concept for AI-assisted reverse engineering. However, contributions are welcome:
 
-- Bug fixes and optimizations
-- Implementing missing features
-- Improving documentation
 - Sharing insights on AI-assisted development workflows
 
 ## ⚖️ Legal Notice
@@ -433,6 +430,8 @@ This project is primarily a proof-of-concept for AI-assisted reverse engineering
 This project is for educational and research purposes, demonstrating AI-assisted reverse engineering techniques. The original Heavy Weapon game is owned by PopCap Games / Electronic Arts. This remake is not affiliated with or endorsed by PopCap or EA.
 
 If you own Heavy Weapon and want to study its implementation, please purchase the original game.
+
+Disclosure: I've previously worked on the original Heavy Weapon for Xbox 20 years ago but I do not hold access to any original game source files.
 
 ## 🙏 Acknowledgments
 
