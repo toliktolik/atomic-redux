@@ -1,0 +1,65 @@
+## What I've Built in 48 hours
+
+A functional recreation of PopCap's Heavy Weapon by reverse engineering the original Win32 executable and rebuilding it in TypeScript/Pixi.js. We pioneered an AI-accelerated workflow using Ghidra's MCP integration with Claude Code to query decompiled functions in real-time and systematically rebuild game systems.
+
+## The Technical Innovation
+
+**Core Stack:**
+- Ghidra for binary analysis and decompilation
+- GhidraMCP for real-time AI queries to decompiled code
+- Claude Code with multi-instance parallel development
+- TypeScript + Pixi.js 7.x for browser-based game engine
+- Custom vibe-coded tooling for PopCap asset conversion (RGB+A format → modern formats)
+
+**The Workflow:**
+1. Decompiled `heavy weapon deluxe.exe` using Ghidra
+2. Used string literals ("PROPFIGHTER", "TWINBLADE") to map game subsystems
+3. Cross-referenced with SexyAppFramework patterns and game XML data
+4. AI-guided systematic function renaming based on context analysis
+5. Real-time queries: "How does tank movement work?" → instant decompiled C code → clean TypeScript
+6. Extracted hardcoded values from binary into unified XML configuration
+
+**Multi-Instance Development:**
+Ran 5-7 parallel Claude Code instances on different subsystems simultaneously, coordinated through markdown planning documents. Essential for complex projects exceeding single-context capacity.
+
+## What's Implemented (~70% Complete)
+
+**Core Systems:**
+- Enemy spawning and wave management (12+ enemy types)
+- Tank physics with realistic inertia and controls
+- Weapon systems (standard gun, mega laser, atomic bomb)
+- Dynamic powerup system with spawn logic
+- Parallax background rendering with scrolling
+- Audio integration (SFX + music)
+- Health/ammo management
+- Score tracking and combo system
+
+**Technical Achievements:**
+- Zero-hardcoded-values architecture: all parameters loaded from XML
+- Extracted hidden formulas and animation timings from binary
+- Clean, readable codebase with descriptive function names matching original intent
+
+**Missing:** Boss mechanics, complete upgrade trees, full UI/HUD (basics only). Particles use Pixi.js native system.
+
+## Key Learnings
+
+**What Worked:**
+- MCP + Ghidra integration felt like magic - 10x acceleration for initial development
+- Multi-instance parallel development essential for complex projects
+- Batch processing context: analyzing functions in groups of 10 vs. individually yielded dramatically better naming
+
+**The Reality Check:**
+- Context management failures emerged around 70% completion
+- Tool call limits (5 queries when needing 20+) created bottlenecks
+- Mid-operation context compaction caused catastrophic information loss
+- Hallucinations increased as context limits approached
+
+**Critical Insights:**
+- Should have used Sonnet [1m] extended thinking model for complex reasoning
+- Success requires extensive planning and documentation structure before coding
+- Proper PRD engineering and continuous auto-documentation essential for 8-12+ subsystem projects
+- Need rigorous context engineering upfront, not mid-project
+
+## The Proof of Concept
+
+From closed-source Win32 PE executable to playable browser game in one weekend demonstrates the viability of AI-assisted reverse engineering for game preservation and remake projects. While context limitations emerged at 70% completion, the core workflow proved powerful and replicable.
