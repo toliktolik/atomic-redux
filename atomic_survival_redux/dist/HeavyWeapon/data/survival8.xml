@@ -1,0 +1,1066 @@
+<?xml version="1.0"?>
+
+
+
+<!-- Level 1 -->
+
+<root>
+    <Level>
+
+    	<Wave length="1000">
+
+    		<Craft id="SMALLJET" qty="9"/>
+
+    		<Craft id="BOMBER" qty="5"/>
+
+    	</Wave>
+
+
+
+    	<Wave length="1000">
+
+    		<Craft id="JETFIGHTER" qty="2"/>
+
+    		<Craft id="SMALLJET" qty="10"/>
+
+    	</Wave>
+
+
+
+    	<Wave length="1000">
+
+    		<Craft id="BOMBER" qty="5"/>
+
+    		<Craft id="JETFIGHTER" qty="1"/>
+
+    	</Wave>
+
+
+
+    	<Wave length="1000">
+
+    		<Craft id="BOMBER" qty="4"/>
+
+    		<Craft id="JETFIGHTER" qty="2"/>
+
+    	</Wave>
+
+    </Level>
+
+
+
+    <!-- Level 2 -->
+
+    <Level>
+
+    	<Wave length="1100">
+
+    		<Craft id="BOMBER" qty="12"/>
+
+    		<Craft id="TRUCK" qty="4"/>
+
+    	</Wave>
+
+
+
+    	<Wave length="1100">
+
+    		<Craft id="BOMBER" qty="10"/>
+
+    		<Craft id="TRUCK" qty="4"/>
+
+    	</Wave>
+
+
+
+    	<Wave length="1100">
+
+    		<Craft id="TRUCK" qty="3"/>
+
+    		<Craft id="JETFIGHTER" qty="7"/>
+
+    	</Wave>
+
+
+
+    	<Wave length="1100">
+
+    		<Craft id="BOMBER" qty="11"/>
+
+    		<Craft id="BIGBOMBER" qty="5"/>
+
+    	</Wave>
+
+    </Level>
+
+
+
+    <!-- Level 3 -->
+
+    <Level>
+
+    	<Wave length="1200">
+
+    		<Craft id="TRUCK" qty="5"/>
+
+    		<Craft id="BOMBER" qty="12"/>
+
+    		<Craft id="JETFIGHTER" qty="7"/>
+
+    	</Wave>
+
+
+
+    	<Wave length="1200">
+
+    		<Craft id="SMALLCOPTER" qty="1"/>
+
+    		<Craft id="BIGBOMBER" qty="4"/>
+
+    		<Craft id="JETFIGHTER" qty="7"/>
+
+    	</Wave>
+
+
+
+    	<Wave length="1200">
+
+    		<Craft id="JETFIGHTER" qty="12"/>
+
+    		<Craft id="BOMBER" qty="16"/>
+
+    	</Wave>
+
+
+
+    	<Wave length="1200">
+
+    		<Craft id="DELTABOMBER" qty="4"/>
+
+    		<Craft id="SMALLCOPTER" qty="3"/>
+
+    	</Wave>
+
+    </Level>
+
+
+
+    <!-- Level 4 -->
+
+    <Level>
+
+    	<Wave length="1300">
+
+    		<Craft id="SMALLCOPTER" qty="5"/>
+
+    		<Craft id="DELTABOMBER" qty="3"/>
+
+    		<Craft id="BIGBOMBER" qty="6"/>
+
+    	</Wave>
+
+
+
+    	<Wave length="1300">
+
+    		<Craft id="JETFIGHTER" qty="10"/>
+
+    		<Craft id="SMALLCOPTER" qty="4"/>
+
+    		<Craft id="BIGMISSILE" qty="3"/>
+
+    	</Wave>
+
+
+
+    	<Wave length="1300">
+
+    		<Craft id="BIGBOMBER" qty="5"/>
+
+    		<Craft id="DELTABOMBER" qty="1"/>
+
+    		<Craft id="DELTAJET" qty="2"/>
+
+    	</Wave>
+
+
+
+    	<Wave length="1300">
+
+    		<Craft id="TRUCK" qty="8"/>
+
+    		<Craft id="SMALLCOPTER" qty="4"/>
+
+    		<Craft id="BIGBOMBER" qty="4"/>
+
+    	</Wave>
+
+    </Level>
+
+
+
+    <!-- Level 5 -->
+
+    <Level>
+
+    	<Wave length="1400">
+
+    		<Craft id="MEDCOPTER" qty="2"/>
+
+    		<Craft id="DELTAJET" qty="5"/>
+
+    		<Craft id="TRUCK" qty="11"/>
+
+    	</Wave>
+
+
+
+    	<Wave length="1400">
+
+    		<Craft id="BIGBOMBER" qty="9"/>
+
+    		<Craft id="JETFIGHTER" qty="14"/>
+
+    		<Craft id="MEDCOPTER" qty="2"/>
+
+    	</Wave>
+
+
+
+    	<Wave length="1400">
+
+    		<Craft id="DELTAJET" qty="6"/>
+
+    		<Craft id="SMALLCOPTER" qty="5"/>
+
+    		<Craft id="BIGBOMBER" qty="9"/>
+
+    	</Wave>
+
+
+
+    	<Wave length="1400">
+
+    		<Craft id="BIGCOPTER" qty="1"/>
+
+    		<Craft id="DELTABOMBER" qty="4"/>
+
+    		<Craft id="BIGBOMBER" qty="7"/>
+
+    	</Wave>
+
+    </Level>
+
+
+
+    <!-- Level 6 -->
+
+    <Level>
+
+    	<Wave length="1500">
+
+    		<Craft id="MEDCOPTER" qty="5"/>
+
+    		<Craft id="DELTAJET" qty="6"/>
+
+    		<Craft id="BIGCOPTER" qty="4"/>
+
+    	</Wave>
+
+
+
+    	<Wave length="1500">
+
+    		<Craft id="DELTABOMBER" qty="5"/>
+
+    		<Craft id="BIGCOPTER" qty="3"/>
+
+    		<Craft id="BLIMP" qty="3"/>
+
+    	</Wave>
+
+
+
+    	<Wave length="1500">
+
+    		<Craft id="DELTABOMBER" qty="5"/>
+
+    		<Craft id="BIGBOMBER" qty="12"/>
+
+    		<Craft id="TRUCK" qty="15"/>
+
+    	</Wave>
+
+
+
+    	<Wave length="1500">
+
+    		<Craft id="BLIMP" qty="3"/>
+
+    		<Craft id="SUPERBOMBER" qty="2"/>
+
+    		<Craft id="SMALLCOPTER" qty="8"/>
+
+    	</Wave>
+
+    </Level>
+
+
+
+    <!-- Level 7 -->
+
+    <Level>
+
+    	<Wave length="1600">
+
+    		<Craft id="CRUISE" qty="3"/>
+
+    		<Craft id="BLIMP" qty="4"/>
+
+    		<Craft id="STRAFER" qty="2"/>
+
+    	</Wave>
+
+
+
+    	<Wave length="1600">
+
+    		<Craft id="SUPERBOMBER" qty="4"/>
+
+    		<Craft id="MEDCOPTER" qty="6"/>
+
+    		<Craft id="TRUCK" qty="17"/>
+
+    	</Wave>
+
+
+
+    	<Wave length="1600">
+
+    		<Craft id="SUPERBOMBER" qty="2"/>
+
+    		<Craft id="BLIMP" qty="4"/>
+
+    		<Craft id="STRAFER" qty="2"/>
+
+    	</Wave>
+
+
+
+    	<Wave length="1600">
+
+    		<Craft id="BIGCOPTER" qty="7"/>
+
+    		<Craft id="SUPERBOMBER" qty="2"/>
+
+    		<Craft id="SMALLCOPTER" qty="10"/>
+
+    	</Wave>
+
+    </Level>
+
+
+
+    <!-- Level 8 -->
+
+    <Level>
+
+    	<Wave length="1700">
+
+    		<Craft id="DELTABOMBER" qty="10"/>
+
+    		<Craft id="SUPERBOMBER" qty="6"/>
+
+    		<Craft id="DELTAJET" qty="10"/>
+
+    	</Wave>
+
+
+
+    	<Wave length="1700">
+
+    		<Craft id="FATBOMBER" qty="2"/>
+
+    		<Craft id="DELTABOMBER" qty="11"/>
+
+    		<Craft id="BIGBOMBER" qty="17"/>
+
+    	</Wave>
+
+
+
+    	<Wave length="1700">
+
+    		<Craft id="SMALLCOPTER" qty="14"/>
+
+    		<Craft id="MEDCOPTER" qty="7"/>
+
+    		<Craft id="SATELLITE" qty="2"/>
+
+    	</Wave>
+
+
+
+    	<Wave length="1700">
+
+    		<Craft id="SUPERBOMBER" qty="6"/>
+
+    		<Craft id="STRAFER" qty="2"/>
+
+    		<Craft id="BIGCOPTER" qty="5"/>
+
+    	</Wave>
+
+    </Level>
+
+
+
+    <!-- Level 9 -->
+
+    <Level>
+
+    	<Wave length="1800">
+
+    		<Craft id="DELTAJET" qty="11"/>
+
+    		<Craft id="BIGCOPTER" qty="6"/>
+
+    		<Craft id="DEFLECTOR" qty="4"/>
+
+    	</Wave>
+
+
+
+    	<Wave length="1800">
+
+    		<Craft id="SUPERBOMBER" qty="6"/>
+
+    		<Craft id="STRAFER" qty="6"/>
+
+    		<Craft id="DELTABOMBER" qty="13"/>
+
+    	</Wave>
+
+
+
+    	<Wave length="1800">
+
+    		<Craft id="FATBOMBER" qty="4"/>
+
+    		<Craft id="SATELLITE" qty="3"/>
+
+    		<Craft id="BLIMP" qty="8"/>
+
+    	</Wave>
+
+
+
+    	<Wave length="1800">
+
+    		<Craft id="DELTAJET" qty="9"/>
+
+    		<Craft id="BIGBOMBER" qty="20"/>
+
+    		<Craft id="DEFLECTOR" qty="2"/>
+
+    	</Wave>
+
+    </Level>
+
+
+
+    <!-- Level 10 -->
+
+    <Level>
+
+    	<Wave length="1900">
+
+    		<Craft id="DELTABOMBER" qty="16"/>
+
+    		<Craft id="BLIMP" qty="8"/>
+
+    		<Craft id="CRUISE" qty="8"/>
+
+    	</Wave>
+
+
+
+    	<Wave length="1900">
+
+    		<Craft id="BIGMISSILE" qty="10"/>
+
+    		<Craft id="SUPERBOMBER" qty="8"/>
+
+    		<Craft id="CRUISE" qty="7"/>
+
+    	</Wave>
+
+
+
+    	<Wave length="1900">
+
+    		<Craft id="STRAFER" qty="6"/>
+
+    		<Craft id="DELTAJET" qty="15"/>
+
+    		<Craft id="BLIMP" qty="6"/>
+
+    	</Wave>
+
+
+
+    	<Wave length="1900">
+
+    		<Craft id="BLIMP" qty="7"/>
+
+    		<Craft id="SUPERBOMBER" qty="8"/>
+
+    		<Craft id="MEDCOPTER" qty="12"/>
+
+    	</Wave>
+
+    </Level>
+
+
+
+    <!-- Level 11 -->
+
+    <Level>
+
+    	<Wave length="2000">
+
+    		<Craft id="SUPERBOMBER" qty="12"/>
+
+    		<Craft id="STRAFER" qty="9"/>
+
+    		<Craft id="BIGMISSILE" qty="15"/>
+
+    	</Wave>
+
+
+
+    	<Wave length="2000">
+
+    		<Craft id="DELTABOMBER" qty="20"/>
+
+    		<Craft id="SUPERBOMBER" qty="12"/>
+
+    		<Craft id="DEFLECTOR" qty="9"/>
+
+    	</Wave>
+
+
+
+    	<Wave length="2000">
+
+    		<Craft id="STRAFER" qty="8"/>
+
+    		<Craft id="BLIMP" qty="9"/>
+
+    		<Craft id="DOZER" qty="5"/>
+
+    	</Wave>
+
+
+
+    	<Wave length="2000">
+
+    		<Craft id="BIGCOPTER" qty="11"/>
+
+    		<Craft id="SATELLITE" qty="9"/>
+
+    		<Craft id="STRAFER" qty="7"/>
+
+    	</Wave>
+
+    </Level>
+
+
+
+    <!-- Level 12 -->
+
+    <Level>
+
+    	<Wave length="2100">
+
+    		<Craft id="BIGMISSILE" qty="16"/>
+
+    		<Craft id="SUPERBOMBER" qty="13"/>
+
+    		<Craft id="FATBOMBER" qty="8"/>
+
+    	</Wave>
+
+
+
+    	<Wave length="2100">
+
+    		<Craft id="BLIMP" qty="12"/>
+
+    		<Craft id="FATBOMBER" qty="9"/>
+
+    		<Craft id="CRUISE" qty="9"/>
+
+    	</Wave>
+
+
+
+    	<Wave length="2100">
+
+    		<Craft id="DEFLECTOR" qty="8"/>
+
+    		<Craft id="BIGMISSILE" qty="15"/>
+
+    		<Craft id="DELTAJET" qty="21"/>
+
+    	</Wave>
+
+
+
+    	<Wave length="2100">
+
+    		<Craft id="SUPERBOMBER" qty="13"/>
+
+    		<Craft id="DEFLECTOR" qty="7"/>
+
+    		<Craft id="SATELLITE" qty="8"/>
+
+    	</Wave>
+
+    </Level>
+
+
+
+    <!-- Level 13 -->
+
+    <Level>
+
+    	<Wave length="2200">
+
+    		<Craft id="STRAFER" qty="13"/>
+
+    		<Craft id="ENEMYTANK" qty="7"/>
+
+    		<Craft id="CRUISE" qty="8"/>
+
+    	</Wave>
+
+
+
+    	<Wave length="2200">
+
+    		<Craft id="SUPERBOMBER" qty="13"/>
+
+    		<Craft id="SATELLITE" qty="8"/>
+
+    		<Craft id="BIGCOPTER" qty="13"/>
+
+    	</Wave>
+
+
+
+    	<Wave length="2200">
+
+    		<Craft id="ENEMYTANK" qty="7"/>
+
+    		<Craft id="DELTAJET" qty="21"/>
+
+    		<Craft id="FATBOMBER" qty="7"/>
+
+    	</Wave>
+
+
+
+    	<Wave length="2200">
+
+    		<Craft id="MEDCOPTER" qty="17"/>
+
+    		<Craft id="FATBOMBER" qty="8"/>
+
+    		<Craft id="DELTAJET" qty="21"/>
+
+    	</Wave>
+
+    </Level>
+
+
+
+    <!-- Level 14 -->
+
+    <Level>
+
+    	<Wave length="2300">
+
+    		<Craft id="MEDCOPTER" qty="19"/>
+
+    		<Craft id="SUPERBOMBER" qty="14"/>
+
+    		<Craft id="ENEMYTANK" qty="8"/>
+
+    	</Wave>
+
+
+
+    	<Wave length="2300">
+
+    		<Craft id="ENEMYTANK" qty="8"/>
+
+    		<Craft id="STRAFER" qty="14"/>
+
+    		<Craft id="CRUISE" qty="13"/>
+
+    	</Wave>
+
+
+
+    	<Wave length="2300">
+
+    		<Craft id="DELTAJET" qty="23"/>
+
+    		<Craft id="MEDCOPTER" qty="19"/>
+
+    		<Craft id="DOZER" qty="8"/>
+
+    	</Wave>
+
+
+
+    	<Wave length="2300">
+
+    		<Craft id="BLIMP" qty="14"/>
+
+    		<Craft id="FATBOMBER" qty="8"/>
+
+    		<Craft id="SUPERBOMBER" qty="12"/>
+
+    	</Wave>
+
+    </Level>
+
+
+
+    <!-- Level 15 -->
+
+    <Level>
+
+    	<Wave length="2400">
+
+    		<Craft id="MEDCOPTER" qty="25"/>
+
+    		<Craft id="SATELLITE" qty="15"/>
+
+    		<Craft id="BLIMP" qty="13"/>
+
+    	</Wave>
+
+
+
+    	<Wave length="2400">
+
+    		<Craft id="DELTAJET" qty="27"/>
+
+    		<Craft id="FATBOMBER" qty="10"/>
+
+    		<Craft id="BLIMP" qty="14"/>
+
+    	</Wave>
+
+
+
+    	<Wave length="2400">
+
+    		<Craft id="ENEMYTANK" qty="10"/>
+
+    		<Craft id="DOZER" qty="8"/>
+
+    		<Craft id="BIGCOPTER" qty="19"/>
+
+    	</Wave>
+
+
+
+    	<Wave length="2400">
+
+    		<Craft id="SUPERBOMBER" qty="20"/>
+
+    		<Craft id="FATBOMBER" qty="10"/>
+
+    		<Craft id="DELTAJET" qty="27"/>
+
+    	</Wave>
+
+    </Level>
+
+
+
+    <!-- Level 16 -->
+
+    <Level>
+
+    	<Wave length="2500">
+
+    		<Craft id="MEDCOPTER" qty="26"/>
+
+    		<Craft id="BIGMISSILE" qty="25"/>
+
+    		<Craft id="SUPERBOMBER" qty="21"/>
+
+    	</Wave>
+
+
+
+    	<Wave length="2500">
+
+    		<Craft id="SUPERBOMBER" qty="21"/>
+
+    		<Craft id="BLIMP" qty="20"/>
+
+    		<Craft id="ENEMYTANK" qty="10"/>
+
+    	</Wave>
+
+
+
+    	<Wave length="2500">
+
+    		<Craft id="DEFLECTOR" qty="10"/>
+
+    		<Craft id="BLIMP" qty="20"/>
+
+    		<Craft id="BIGMISSILE" qty="26"/>
+
+    	</Wave>
+
+
+
+    	<Wave length="2500">
+
+    		<Craft id="ENEMYTANK" qty="11"/>
+
+    		<Craft id="SATELLITE" qty="14"/>
+
+    		<Craft id="BIGCOPTER" qty="20"/>
+
+    	</Wave>
+
+    </Level>
+
+
+
+    <!-- Level 17 -->
+
+    <Level>
+
+    	<Wave length="2600">
+
+    		<Craft id="CRUISE" qty="14"/>
+
+    		<Craft id="BIGCOPTER" qty="27"/>
+
+    		<Craft id="DOZER" qty="9"/>
+
+    	</Wave>
+
+
+
+    	<Wave length="2600">
+
+    		<Craft id="ENEMYTANK" qty="11"/>
+
+    		<Craft id="CRUISE" qty="16"/>
+
+    		<Craft id="SATELLITE" qty="14"/>
+
+    	</Wave>
+
+
+
+    	<Wave length="2600">
+
+    		<Craft id="SUPERBOMBER" qty="21"/>
+
+    		<Craft id="CRUISE" qty="14"/>
+
+    		<Craft id="BLIMP" qty="19"/>
+
+    	</Wave>
+
+
+
+    	<Wave length="2600">
+
+    		<Craft id="SUPERBOMBER" qty="20"/>
+
+    		<Craft id="CRUISE" qty="14"/>
+
+    		<Craft id="STRAFER" qty="19"/>
+
+    	</Wave>
+
+    </Level>
+
+
+
+    <!-- Level 18 -->
+
+    <Level>
+
+    	<Wave length="2700">
+
+    		<Craft id="MEDCOPTER" qty="32"/>
+
+    		<Craft id="FATBOMBER" qty="15"/>
+
+    		<Craft id="SUPERBOMBER" qty="28"/>
+
+    	</Wave>
+
+
+
+    	<Wave length="2700">
+
+    		<Craft id="SUPERBOMBER" qty="27"/>
+
+    		<Craft id="SATELLITE" qty="16"/>
+
+    		<Craft id="BLIMP" qty="20"/>
+
+    	</Wave>
+
+
+
+    	<Wave length="2700">
+
+    		<Craft id="DEFLECTOR" qty="16"/>
+
+    		<Craft id="FATBOMBER" qty="15"/>
+
+    		<Craft id="CRUISE" qty="20"/>
+
+    	</Wave>
+
+
+
+    	<Wave length="2700">
+
+    		<Craft id="STRAFER" qty="20"/>
+
+    		<Craft id="BLIMP" qty="22"/>
+
+    		<Craft id="SUPERBOMBER" qty="28"/>
+
+    	</Wave>
+
+    </Level>
+
+
+
+    <!-- Level 19 -->
+
+    <Level>
+
+    	<Wave length="2800">
+
+    		<Craft id="DEFLECTOR" qty="15"/>
+
+    		<Craft id="MEDCOPTER" qty="32"/>
+
+    		<Craft id="SATELLITE" qty="16"/>
+
+    	</Wave>
+
+
+
+    	<Wave length="2800">
+
+    		<Craft id="FATBOMBER" qty="15"/>
+
+    		<Craft id="SUPERBOMBER" qty="27"/>
+
+    		<Craft id="SATELLITE" qty="15"/>
+
+    	</Wave>
+
+
+
+    	<Wave length="2800">
+
+    		<Craft id="BLIMP" qty="22"/>
+
+    		<Craft id="DEFLECTOR" qty="16"/>
+
+    		<Craft id="ENEMYTANK" qty="16"/>
+
+    	</Wave>
+
+
+
+    	<Wave length="2800">
+
+    		<Craft id="FATBOMBER" qty="16"/>
+
+    		<Craft id="DOZER" qty="15"/>
+
+    		<Craft id="DEFLECTOR" qty="15"/>
+
+    	</Wave>
+
+    </Level>
+
+
+
+    <!-- Level 20 -->
+
+    <Level>
+
+    	<Wave length="2900">
+
+    		<Craft id="FATBOMBER" qty="18"/>
+
+    		<Craft id="STRAFER" qty="24"/>
+
+    		<Craft id="ENEMYTANK" qty="16"/>
+
+    	</Wave>
+
+
+
+    	<Wave length="2900">
+
+    		<Craft id="FATBOMBER" qty="16"/>
+
+    		<Craft id="SATELLITE" qty="24"/>
+
+    		<Craft id="ENEMYTANK" qty="18"/>
+
+    	</Wave>
+
+
+
+    	<Wave length="2900">
+
+    		<Craft id="DEFLECTOR" qty="16"/>
+
+    		<Craft id="BIGCOPTER" qty="33"/>
+
+    		<Craft id="ENEMYTANK" qty="16"/>
+
+    	</Wave>
+
+
+
+    	<Wave length="2900">
+
+    		<Craft id="BLIMP" qty="30"/>
+
+    		<Craft id="SATELLITE" qty="23"/>
+
+    		<Craft id="ENEMYTANK" qty="16"/>
+
+    	</Wave>
+
+    </Level>
+
+
+
+</root>

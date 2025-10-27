@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atomic Survival Redux - Test Runner</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        #loading {
+            color: #fff;
+            font-family: 'Courier New', monospace;
+            font-size: 24px;
+            text-align: center;
+        }
+        #error-log {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0,0,0,0.9);
+            color: #0f0;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            padding: 10px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="loading">INITIALIZING...</div>
+    <div id="error-log"></div>
+
+    <script type="module">
+        const errorLog = document.getElementById('error-log');
+        let errors = [];
+
+        // Capture errors
+        window.addEventListener('error', (e) => {
+            const msg = `ERROR: ${e.message} at ${e.filename}:${e.lineno}:${e.colno}`;
+            errors.push(msg);
+            errorLog.innerHTML = errors.join('<br>');
+            console.error(e);
+        });
+
+        window.addEventListener('unhandledrejection', (e) => {
+            const msg = `PROMISE REJECTION: ${e.reason}`;
+            errors.push(msg);
+            errorLog.innerHTML = errors.join('<br>');
+            console.error(e);
+        });
+
+        // Load the game
+        import('./src/main.ts').then(() => {
+            console.log('Game module loaded successfully');
+        }).catch((err) => {
+            const msg = `FAILED TO LOAD: ${err.message}`;
+            errors.push(msg);
+            errorLog.innerHTML = errors.join('<br>');
+            console.error(err);
+        });
+    </script>
+</body>
+</html>

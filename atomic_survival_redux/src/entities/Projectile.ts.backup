@@ -1,0 +1,657 @@
+/**
+ * Projectile Entity - Handles all projectiles (player and enemy)
+ */
+
+import * as PIXI from 'pixi.js';
+import { Game } from '../core/Game';
+import { GameConstants } from '../config/GameConstants';
+import { AssetLoader } from '../core/AssetLoader';
+import { DirectionalSprite } from '../core/DirectionalSprite';
+import { AnimatedSprite } from '../core/AnimatedSprite';
+import { AnimationConfig } from '../config/AnimationConfig';
+
+export enum ProjectileType {
+    BULLET = 'BULLET',
+    MISSILE = 'MISSILE',
+    LASER = 'LASER',
+    ROCKET = 'ROCKET',
+    FLAK = 'FLAK',
+    THUNDER = 'THUNDER',
+    BOMB = 'BOMB',
+    ENERGY_BALL = 'ENERGY_BALL'
+}
+
+export class Projectile extends PIXI.Container {
+    private game: Game;
+
+    // Properties
+    public damage: number;
+    public speed: number;
+    public angle: number;
+    public isPlayerProjectile: boolean;
+    public isDestroyed: boolean = false;
+    public type: ProjectileType;
+
+    // Movement
+    private velocity: PIXI.Point;
+    private lifeTime: number = 0;
+    private maxLifeTime: number = 5000; // 5 seconds max
+
+    // Homing properties
+    private isHoming: boolean = false;
+    private homingTarget?: PIXI.Container;
+    private homingStrength: number = 0.05;
+    private homingTargetX?: number;
+    private homingTargetY?: number;
+
+    // Visual
+    private sprite: PIXI.Sprite | AnimatedSprite | DirectionalSprite;
+    private trail?: PIXI.Graphics;
+    private trailPositions: PIXI.Point[] = [];
+
+    // Special properties
+    private isPiercing: boolean = false;
+    private splashRadius: number = 0;
+    private hasGravity: boolean = false;
+    private gravity: number = 0;
+    private isExplosive: boolean = false;
+    private explosionRadius: number = 0;
+    private hasPenetration: boolean = false;
+    private fragmentCount: number = 0;
+    private isBurst: boolean = false;
+    private burstProjectiles: number = 0;
+    private glowColor?: number;
+    private glowIntensity?: number;
+
+    constructor(
+        game: Game,
+        x: number,
+        y: number,
+        angle: number,
+        speed: number,
+        damage: number,
+        isPlayerProjectile: boolean,
+        textureName: string = 'bullet'
+    ) {
+        super();
+        this.game = game;
+
+        // Position
+        this.x = x;
+        this.y = y;
+
+        // Properties
+        this.angle = angle;
+        this.speed = speed;
+        this.damage = damage;
+        this.isPlayerProjectile = isPlayerProjectile;
+
+        // Determine type from texture
+        this.type = this.getTypeFromTexture(textureName);
+
+        // Set special properties based on type
+        this.setSpecialProperties();
+
+        // Calculate velocity
+        this.velocity = new PIXI.Point(
+            Math.cos(angle) * speed,
+            Math.sin(angle) * speed
+        );
+
+        // Create sprite based on projectile type and animation config
+        this.createProjectileSprite(textureName, angle);
+
+        // Create trail for certain projectiles
+        if (this.shouldHaveTrail()) {
+            this.createTrail();
+        }
+
+        // Add glow effect for energy weapons
+        if (this.type === ProjectileType.LASER || this.type === ProjectileType.ENERGY_BALL) {
+            this.addGlowEffect();
+        }
+    }
+
+    /**
+     * Create appropriate sprite type based on texture name and animation config
+     */
+    private createProjectileSprite(textureName: string, angle: number): void {
+        // Check if this texture has animation configuration
+        const animConfig = AnimationConfig[textureName];
+
+        if (textureName === 'bullet' || textureName === 'bullets') {
+            // Bullets use directional sprite system (multi-row grid)
+            const directionalSprite = AssetLoader.createDirectionalSprite('bullets');
+            if (directionalSprite) {
+                directionalSprite.setAngleAndRow(angle, 0); // Use first row for standard bullets
+                directionalSprite.anchor.set(0.5);
+                this.sprite = directionalSprite;
+                this.addChild(this.sprite);
+            } else {
+                this.createFallbackSprite(textureName, angle);
+            }
+        } else if (animConfig && animConfig.frameCount > 1 && !animConfig.rowCount) {
+            // Animated projectiles (like dumbbomb, missile, rocket)
+            const animatedSprite = AssetLoader.createAnimatedSprite(textureName);
+            if (animatedSprite) {
+                animatedSprite.anchor.set(0.5);
+                animatedSprite.rotation = angle;
+                this.sprite = animatedSprite;
+                this.addChild(this.sprite);
+            } else {
+                this.createFallbackSprite(textureName, angle);
+            }
+        } else {
+            // Static projectiles use regular sprites
+            this.createFallbackSprite(textureName, angle);
+        }
+    }
+
+    /**
+     * Create fallback regular sprite
+     */
+    private createFallbackSprite(textureName: string, angle: number): void {
+        this.sprite = new PIXI.Sprite(AssetLoader.getTexture(textureName));
+        this.sprite.anchor.set(0.5);
+        this.sprite.rotation = angle;
+        this.addChild(this.sprite);
+    }
+
+    /**
+     * Update projectile each frame
+     */
+    public update(deltaTime: number, enemies?: any[]): void {
+        if (this.isDestroyed) return;
+
+        // Update lifetime
+        this.lifeTime += deltaTime * 1000;
+        if (this.lifeTime >= this.maxLifeTime) {
+            this.destroy();
+            return;
+        }
+
+        // Update homing behavior
+        if (this.isHoming && this.homingTarget && enemies) {
+            this.updateHoming(deltaTime, enemies);
+        }
+
+        // Apply gravity if needed
+        if (this.hasGravity) {
+            this.velocity.y += GameConstants.PHYSICS.GRAVITY * deltaTime;
+        }
+
+        // Update position
+        this.x += this.velocity.x * deltaTime;
+        this.y += this.velocity.y * deltaTime;
+
+        // Update animated sprite if applicable
+        if (this.sprite instanceof AnimatedSprite) {
+            this.sprite.update(deltaTime);
+        }
+
+        // Update rotation to match velocity (but not for directional sprites)
+        if (!(this.sprite instanceof DirectionalSprite)) {
+            if (!this.hasGravity && !this.isHoming) {
+                this.sprite.rotation = this.angle;
+            } else {
+                this.sprite.rotation = Math.atan2(this.velocity.y, this.velocity.x);
+            }
+        } else if (this.isHoming) {
+            // Update directional sprite angle if homing
+            const newAngle = Math.atan2(this.velocity.y, this.velocity.x);
+            this.sprite.setAngleAndRow(newAngle, 0);
+        }
+
+        // Update trail
+        if (this.trail) {
+            this.updateTrail();
+        }
+
+        // Check if off screen
+        if (this.isOffScreen()) {
+            this.destroy();
+        }
+    }
+
+    /**
+     * Update homing behavior
+     */
+    private updateHoming(deltaTime: number, enemies: any[]): void {
+        // Find closest enemy for player projectiles
+        if (this.isPlayerProjectile && enemies.length > 0) {
+            let closestEnemy = null;
+            let closestDistance = Infinity;
+
+            for (const enemy of enemies) {
+                if (!enemy.isDestroyed) {
+                    const distance = Math.sqrt(
+                        Math.pow(enemy.x - this.x, 2) +
+                        Math.pow(enemy.y - this.y, 2)
+                    );
+                    if (distance < closestDistance) {
+                        closestDistance = distance;
+                        closestEnemy = enemy;
+                    }
+                }
+            }
+
+            this.homingTarget = closestEnemy;
+        }
+
+        // Apply homing force
+        if (this.homingTarget && !(this.homingTarget as any).isDestroyed) {
+            const dx = this.homingTarget.x - this.x;
+            const dy = this.homingTarget.y - this.y;
+            const targetAngle = Math.atan2(dy, dx);
+
+            // Smoothly turn towards target
+            const angleDiff = this.normalizeAngle(targetAngle - this.angle);
+            this.angle += angleDiff * this.homingStrength;
+
+            // Update velocity
+            this.velocity.x = Math.cos(this.angle) * this.speed;
+            this.velocity.y = Math.sin(this.angle) * this.speed;
+        }
+    }
+
+    /**
+     * Create trail effect
+     */
+    private createTrail(): void {
+        this.trail = new PIXI.Graphics();
+        this.addChildAt(this.trail, 0);
+    }
+
+    /**
+     * Update trail effect
+     */
+    private updateTrail(): void {
+        if (!this.trail) return;
+
+        // Add current position to trail
+        this.trailPositions.push(new PIXI.Point(this.x, this.y));
+
+        // Limit trail length
+        const maxTrailLength = 10;
+        if (this.trailPositions.length > maxTrailLength) {
+            this.trailPositions.shift();
+        }
+
+        // Draw trail
+        this.trail.clear();
+        if (this.trailPositions.length > 1) {
+            for (let i = 0; i < this.trailPositions.length - 1; i++) {
+                const alpha = (i / this.trailPositions.length) * 0.5;
+                const width = (i / this.trailPositions.length) * 3;
+
+                this.trail.lineStyle(width, this.getTrailColor(), alpha);
+                this.trail.moveTo(
+                    this.trailPositions[i].x - this.x,
+                    this.trailPositions[i].y - this.y
+                );
+                this.trail.lineTo(
+                    this.trailPositions[i + 1].x - this.x,
+                    this.trailPositions[i + 1].y - this.y
+                );
+            }
+        }
+    }
+
+    /**
+     * Add glow effect for energy weapons
+     */
+    private addGlowEffect(): void {
+        const glow = new PIXI.Graphics();
+        glow.beginFill(this.getGlowColor(), 0.3);
+        glow.drawCircle(0, 0, 15);
+        glow.endFill();
+        this.addChildAt(glow, 0);
+    }
+
+    /**
+     * Get projectile type from texture name
+     */
+    private getTypeFromTexture(textureName: string): ProjectileType {
+        switch (textureName) {
+            case 'missile': return ProjectileType.MISSILE;
+            case 'laser': return ProjectileType.LASER;
+            case 'rocket': return ProjectileType.ROCKET;
+            case 'bomb': return ProjectileType.BOMB;
+            case 'energy_ball': return ProjectileType.ENERGY_BALL;
+            default: return ProjectileType.BULLET;
+        }
+    }
+
+    /**
+     * Set special properties based on projectile type
+     */
+    private setSpecialProperties(): void {
+        switch (this.type) {
+            case ProjectileType.MISSILE:
+                this.isHoming = true;
+                this.homingStrength = 0.08;
+                this.maxLifeTime = 3000;
+                break;
+
+            case ProjectileType.LASER:
+                this.isPiercing = true;
+                this.maxLifeTime = 1000;
+                break;
+
+            case ProjectileType.ROCKET:
+                this.splashRadius = 50;
+                this.maxLifeTime = 2000;
+                break;
+
+            case ProjectileType.BOMB:
+                this.hasGravity = true;
+                this.splashRadius = 75;
+                this.maxLifeTime = 5000;
+                break;
+
+            case ProjectileType.ENERGY_BALL:
+                this.splashRadius = 40;
+                this.maxLifeTime = 4000;
+                break;
+
+            default:
+                this.maxLifeTime = 2000;
+                break;
+        }
+    }
+
+    /**
+     * Check if projectile should have trail
+     */
+    private shouldHaveTrail(): boolean {
+        return this.type === ProjectileType.MISSILE ||
+               this.type === ProjectileType.ROCKET;
+    }
+
+    /**
+     * Get trail color based on type
+     */
+    private getTrailColor(): number {
+        switch (this.type) {
+            case ProjectileType.MISSILE: return 0xff8800;
+            case ProjectileType.ROCKET: return 0xffaa00;
+            default: return 0xffffff;
+        }
+    }
+
+    /**
+     * Get glow color based on type
+     */
+    private getGlowColor(): number {
+        switch (this.type) {
+            case ProjectileType.LASER: return 0x00ffff;
+            case ProjectileType.ENERGY_BALL: return 0x00ff00;
+            default: return 0xffffff;
+        }
+    }
+
+    /**
+     * Normalize angle to -PI to PI
+     */
+    private normalizeAngle(angle: number): number {
+        while (angle > Math.PI) angle -= Math.PI * 2;
+        while (angle < -Math.PI) angle += Math.PI * 2;
+        return angle;
+    }
+
+    /**
+     * Check if projectile is off screen
+     */
+    private isOffScreen(): boolean {
+        const margin = 100;
+        return this.x < -margin ||
+               this.x > GameConstants.SCREEN_WIDTH + margin ||
+               this.y < -margin ||
+               this.y > GameConstants.SCREEN_HEIGHT + margin;
+    }
+
+    /**
+     * Get bounds for collision detection
+     */
+    public getBounds(): PIXI.Rectangle {
+        // Use fixed sizes for collision detection since sprite dimensions might not be reliable
+        let width = 10;  // Default bullet width
+        let height = 10; // Default bullet height
+
+        // Try to get actual sprite dimensions if available
+        if (this.sprite) {
+            width = this.sprite.width || width;
+            height = this.sprite.height || height;
+
+            // For very small or very large values, use reasonable defaults
+            if (width < 2 || width > 100) width = 10;
+            if (height < 2 || height > 100) height = 10;
+        }
+
+        return new PIXI.Rectangle(
+            this.x - width / 2,
+            this.y - height / 2,
+            width,
+            height
+        );
+    }
+
+
+    /**
+     * Create splash damage effect
+     */
+    private createSplashDamage(): void {
+        // This will be handled by the collision system
+        // Create explosion at this position with splash radius
+        this.game.getParticleSystem().createExplosion(
+            this.x,
+            this.y,
+            this.splashRadius > 50 ? 'large' : 'small'
+        );
+    }
+
+    /**
+     * Get splash damage radius
+     */
+    public getSplashRadius(): number {
+        return this.splashRadius;
+    }
+
+    /**
+     * Check if projectile is piercing
+     */
+    public getIsPiercing(): boolean {
+        return this.isPiercing;
+    }
+
+    /**
+     * Set gravity for projectile
+     */
+    public setGravity(gravity: number): void {
+        this.hasGravity = gravity > 0;
+        this.gravity = gravity;
+    }
+
+    /**
+     * Set homing behavior
+     */
+    public setHoming(enabled: boolean, targetX?: number, targetY?: number, strength?: number): void {
+        this.isHoming = enabled;
+        if (targetX !== undefined) this.homingTargetX = targetX;
+        if (targetY !== undefined) this.homingTargetY = targetY;
+        if (strength !== undefined) this.homingStrength = strength;
+    }
+
+    /**
+     * Set explosive behavior
+     */
+    public setExplosive(explosive: boolean, radius: number = 50): void {
+        this.isExplosive = explosive;
+        this.explosionRadius = radius;
+        this.splashRadius = radius; // For compatibility
+    }
+
+    /**
+     * Set penetration behavior
+     */
+    public setPenetration(penetrating: boolean): void {
+        this.hasPenetration = penetrating;
+        this.isPiercing = penetrating; // For compatibility
+    }
+
+    /**
+     * Set fragment behavior
+     */
+    public setFragments(count: number): void {
+        this.fragmentCount = count;
+    }
+
+    /**
+     * Set burst behavior
+     */
+    public setBurst(burst: boolean, projectileCount: number = 4): void {
+        this.isBurst = burst;
+        this.burstProjectiles = projectileCount;
+    }
+
+    /**
+     * Set glow effect
+     */
+    public setGlow(color: number, intensity: number = 0.8): void {
+        this.glowColor = color;
+        this.glowIntensity = intensity;
+        this.addGlowEffect();
+    }
+
+    /**
+     * Handle explosive impact
+     */
+    private handleExplosion(): void {
+        if (!this.isExplosive) return;
+
+        // Create explosion effect
+        this.game.getParticleSystem().createExplosion(
+            this.x,
+            this.y,
+            this.explosionRadius > 100 ? 'massive' : this.explosionRadius > 50 ? 'large' : 'small'
+        );
+
+        // Create fragments if specified
+        if (this.fragmentCount > 0) {
+            this.createFragments();
+        }
+
+        // Create burst projectiles if specified
+        if (this.isBurst && this.burstProjectiles > 0) {
+            this.createBurstProjectiles();
+        }
+    }
+
+    /**
+     * Create fragment projectiles
+     */
+    private createFragments(): void {
+        const angleStep = (Math.PI * 2) / this.fragmentCount;
+        for (let i = 0; i < this.fragmentCount; i++) {
+            const angle = angleStep * i;
+            const fragmentSpeed = this.speed * 0.6;
+            const fragmentDamage = Math.ceil(this.damage * 0.3);
+
+            const fragment = new Projectile(
+                this.game,
+                this.x,
+                this.y,
+                angle,
+                fragmentSpeed,
+                fragmentDamage,
+                this.isPlayerProjectile,
+                'fragment'
+            );
+
+            fragment.setGravity(0.3);
+            this.game.addProjectile(fragment);
+        }
+    }
+
+    /**
+     * Create burst projectiles
+     */
+    private createBurstProjectiles(): void {
+        const angleStep = (Math.PI * 2) / this.burstProjectiles;
+        for (let i = 0; i < this.burstProjectiles; i++) {
+            const angle = angleStep * i;
+            const burstSpeed = this.speed * 0.8;
+            const burstDamage = Math.ceil(this.damage * 0.5);
+
+            const burstProjectile = new Projectile(
+                this.game,
+                this.x,
+                this.y,
+                angle,
+                burstSpeed,
+                burstDamage,
+                this.isPlayerProjectile,
+                'burst_rocket'
+            );
+
+            this.game.addProjectile(burstProjectile);
+        }
+    }
+
+    /**
+     * Update homing behavior with coordinates
+     */
+    private updateHomingWithCoords(deltaTime: number): void {
+        if (!this.isHoming || (this.homingTargetX === undefined || this.homingTargetY === undefined)) return;
+
+        const dx = this.homingTargetX - this.x;
+        const dy = this.homingTargetY - this.y;
+        const targetAngle = Math.atan2(dy, dx);
+
+        // Gradually adjust angle towards target
+        const angleDiff = targetAngle - this.angle;
+        const adjustedAngleDiff = Math.atan2(Math.sin(angleDiff), Math.cos(angleDiff));
+
+        this.angle += adjustedAngleDiff * this.homingStrength;
+
+        // Update velocity based on new angle
+        this.velocity.x = Math.cos(this.angle) * this.speed;
+        this.velocity.y = Math.sin(this.angle) * this.speed;
+
+        // Update sprite rotation
+        if (this.sprite) {
+            this.sprite.rotation = this.angle;
+        }
+    }
+
+    /**
+     * Handle collision with explosive behavior
+     */
+    public onCollision(): void {
+        if (this.isDestroyed) return;
+
+        // Handle explosion first
+        if (this.isExplosive) {
+            this.handleExplosion();
+        }
+
+        // Create splash damage if has splash radius
+        if (this.splashRadius > 0 && !this.isExplosive) {
+            this.createSplashDamage();
+        }
+
+        // Destroy if not piercing/penetrating
+        if (!this.isPiercing && !this.hasPenetration) {
+            this.destroy();
+        }
+    }
+
+
+    /**
+     * Destroy projectile
+     */
+    public destroy(): void {
+        this.isDestroyed = true;
+        super.destroy();
+    }
+}

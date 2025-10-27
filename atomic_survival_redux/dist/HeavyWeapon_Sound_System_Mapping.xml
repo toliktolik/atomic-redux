@@ -1,0 +1,550 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Heavy Weapon Deluxe - Complete Sound System Mapping -->
+<!-- This file maps all sound resources to game events and functions -->
+
+<SoundSystemDatabase>
+    <Metadata>
+        <Game>Heavy Weapon Deluxe</Game>
+        <TotalSounds>94</TotalSounds>
+        <SoundFormat>OGG Vorbis</SoundFormat>
+        <BasePath>HeavyWeapon/Sounds/</BasePath>
+        <MusicPath>HeavyWeapon/Music/</MusicPath>
+        <GeneratedBy>Ghidra Analysis + Resource Inspection</GeneratedBy>
+    </Metadata>
+
+    <!-- Core Sound System Functions -->
+    <SoundSystemFunctions>
+        <Function name="Sound_PlaySound" address="0x0049f0d0" description="Primary sound playing function" />
+        <Function name="Sound_PlayWeaponFire" address="0x00439060" description="Weapon firing sounds" />
+        <Function name="Sound_PlayExplosion" address="0x00439000" description="Explosion sound effects" />
+        <Function name="Sound_PlayPowerUpCollected" address="0x00439120" description="Power-up collection sounds" />
+        <Function name="Sound_PlayEnemyDestroyed" address="0x004390f0" description="Enemy destruction sounds" />
+        <Function name="Sound_PlayBackgroundMusic" address="0x00439e60" description="Background music playback" />
+        <Function name="Audio_PlaySoundEffect" address="0x0041bf50" description="Generic sound effect player" />
+        <Function name="Audio_ProcessWeaponSounds" address="0x00412ba0" description="Weapon sound processing" />
+        <Function name="Audio_ProcessExplosionSounds" address="0x00412b70" description="Explosion sound processing" />
+        <Function name="Audio_ProcessPowerUpSounds" address="0x00412c60" description="Power-up sound processing" />
+        <Function name="Audio_ProcessEnemySounds" address="0x00412bf0" description="Enemy sound processing" />
+        <Function name="Audio_ProcessBossSounds" address="0x00412d00" description="Boss sound processing" />
+        <Function name="Audio_ProcessEnvironmentalSounds" address="0x00412b40" description="Environmental sound processing" />
+    </SoundSystemFunctions>
+
+    <!-- Player Weapon Sounds -->
+    <SoundCategory name="PlayerWeapons" priority="high">
+        <Sound file="tankfire.ogg" event="StandardGun">
+            <Function>Sound_PlayWeaponFire</Function>
+            <TriggerCondition>Mouse click or hold</TriggerCondition>
+            <Description>Standard tank gun firing</Description>
+        </Sound>
+
+        <Sound file="tankfire1.ogg" event="GunLevel1">
+            <Function>Sound_PlayWeaponFire</Function>
+            <TriggerCondition>Gun upgrade level 1</TriggerCondition>
+        </Sound>
+
+        <Sound file="tankfire2.ogg" event="GunLevel2">
+            <Function>Sound_PlayWeaponFire</Function>
+            <TriggerCondition>Gun upgrade level 2</TriggerCondition>
+        </Sound>
+
+        <Sound file="tankfire3.ogg" event="GunLevel3">
+            <Function>Sound_PlayWeaponFire</Function>
+            <TriggerCondition>Gun upgrade level 3</TriggerCondition>
+        </Sound>
+
+        <Sound file="tankfire4.ogg" event="GunLevel4">
+            <Function>Sound_PlayWeaponFire</Function>
+            <TriggerCondition>Gun upgrade level 4</TriggerCondition>
+        </Sound>
+
+        <Sound file="laser.ogg" event="LaserWeapon">
+            <Function>Audio_ProcessWeaponSounds</Function>
+            <Memory>Offset 0x24 in weapon object</Memory>
+        </Sound>
+
+        <Sound file="tanklaser.ogg" event="TankLaser">
+            <Function>Audio_ProcessWeaponSounds</Function>
+            <Description>Tank-mounted laser cannon</Description>
+        </Sound>
+
+        <Sound file="missile.ogg" event="HomingMissile">
+            <Function>Audio_ProcessWeaponSounds</Function>
+            <Description>Homing missile launch</Description>
+        </Sound>
+
+        <Sound file="smallmissile.ogg" event="SmallMissile">
+            <Function>Audio_ProcessWeaponSounds</Function>
+            <Description>Small missile launch</Description>
+        </Sound>
+
+        <Sound file="flak.ogg" event="FlakCannon">
+            <Function>Audio_ProcessWeaponSounds</Function>
+            <Description>Flak cannon firing</Description>
+        </Sound>
+
+        <Sound file="thunder.ogg" event="Thunderstrike">
+            <Function>Audio_ProcessWeaponSounds</Function>
+            <Description>Thunderstrike special weapon</Description>
+        </Sound>
+    </SoundCategory>
+
+    <!-- Explosion Sounds -->
+    <SoundCategory name="Explosions" priority="high">
+        <Sound file="bigexplode.ogg" event="LargeExplosion">
+            <Function>Sound_PlayExplosion</Function>
+            <TriggerCondition>Boss/large enemy destruction</TriggerCondition>
+        </Sound>
+
+        <Sound file="smallexplode.ogg" event="SmallExplosion">
+            <Function>Sound_PlayExplosion</Function>
+            <TriggerCondition>Standard enemy destruction</TriggerCondition>
+        </Sound>
+
+        <Sound file="tankexplode.ogg" event="TankExplosion">
+            <Function>Sound_PlayExplosion</Function>
+            <TriggerCondition>Enemy tank destruction</TriggerCondition>
+        </Sound>
+
+        <Sound file="nukeblast.ogg" event="NukeExplosion">
+            <Function>Sound_PlayExplosion</Function>
+            <TriggerCondition>Nuke detonation (right mouse)</TriggerCondition>
+        </Sound>
+    </SoundCategory>
+
+    <!-- Power-up Sounds -->
+    <SoundCategory name="PowerUps" priority="medium">
+        <Sound file="powerup.ogg" event="GenericPowerUp">
+            <Function>Sound_PlayPowerUpCollected</Function>
+            <TriggerCondition>Any power-up collection</TriggerCondition>
+        </Sound>
+
+        <Sound file="gunpowerup.ogg" event="GunPowerUp">
+            <Function>Audio_ProcessPowerUpSounds</Function>
+            <TriggerCondition>Gun upgrade collected</TriggerCondition>
+        </Sound>
+
+        <Sound file="laserpowerup.ogg" event="LaserPowerUp">
+            <Function>Audio_ProcessPowerUpSounds</Function>
+            <TriggerCondition>Laser upgrade collected</TriggerCondition>
+        </Sound>
+
+        <Sound file="shieldup.ogg" event="ShieldActivate">
+            <Function>Audio_ProcessPowerUpSounds</Function>
+            <TriggerCondition>Shield power-up activated</TriggerCondition>
+        </Sound>
+
+        <Sound file="shielddown.ogg" event="ShieldDeactivate">
+            <Function>Audio_ProcessPowerUpSounds</Function>
+            <TriggerCondition>Shield expires</TriggerCondition>
+        </Sound>
+
+        <Sound file="speedup.ogg" event="SpeedBoost">
+            <Function>Audio_ProcessPowerUpSounds</Function>
+            <TriggerCondition>Speed boost collected</TriggerCondition>
+        </Sound>
+
+        <Sound file="megalaser_start.ogg" event="MegaLaserStart">
+            <Function>Audio_ProcessPowerUpSounds</Function>
+            <TriggerCondition>Mega laser activation</TriggerCondition>
+        </Sound>
+
+        <Sound file="megalaser.ogg" event="MegaLaserActive">
+            <Function>Audio_ProcessPowerUpSounds</Function>
+            <TriggerCondition>Mega laser continuous</TriggerCondition>
+            <Looping>true</Looping>
+        </Sound>
+
+        <Sound file="megalaser_stop.ogg" event="MegaLaserStop">
+            <Function>Audio_ProcessPowerUpSounds</Function>
+            <TriggerCondition>Mega laser deactivation</TriggerCondition>
+        </Sound>
+
+        <Sound file="megalaser_out.ogg" event="MegaLaserExpire">
+            <Function>Audio_ProcessPowerUpSounds</Function>
+            <TriggerCondition>Mega laser expires</TriggerCondition>
+        </Sound>
+    </SoundCategory>
+
+    <!-- Enemy Sounds -->
+    <SoundCategory name="Enemies" priority="medium">
+        <Sound file="enemyfire.ogg" event="EnemyShoot">
+            <Function>Audio_ProcessEnemySounds</Function>
+            <TriggerCondition>Enemy fires weapon</TriggerCondition>
+        </Sound>
+
+        <Sound file="enemytankgun.ogg" event="EnemyTankFire">
+            <Function>Audio_ProcessEnemySounds</Function>
+            <TriggerCondition>Enemy tank fires</TriggerCondition>
+        </Sound>
+
+        <Sound file="bombfall.ogg" event="BombDrop">
+            <Function>Audio_ProcessEnemySounds</Function>
+            <TriggerCondition>Bomber drops bomb</TriggerCondition>
+        </Sound>
+
+        <Sound file="jetdive.ogg" event="JetDive">
+            <Function>Audio_ProcessEnemySounds</Function>
+            <TriggerCondition>Jet fighter diving</TriggerCondition>
+        </Sound>
+
+        <Sound file="diesel.ogg" event="TankEngine">
+            <Function>Audio_ProcessEnemySounds</Function>
+            <TriggerCondition>Enemy tank moving</TriggerCondition>
+            <Looping>true</Looping>
+        </Sound>
+
+        <Sound file="deflect.ogg" event="BulletDeflect">
+            <Function>Audio_ProcessEnemySounds</Function>
+            <TriggerCondition>Deflector enemy deflects bullets</TriggerCondition>
+        </Sound>
+
+        <Sound file="airmine.ogg" event="AirMine">
+            <Function>Audio_ProcessEnemySounds</Function>
+            <TriggerCondition>Air mine detonation</TriggerCondition>
+        </Sound>
+
+        <Sound file="satlaser.ogg" event="SatelliteLaser">
+            <Function>Audio_ProcessEnemySounds</Function>
+            <TriggerCondition>Satellite fires laser</TriggerCondition>
+        </Sound>
+    </SoundCategory>
+
+    <!-- Boss Sounds -->
+    <SoundCategory name="Bosses" priority="high">
+        <Sound file="bosscopter.ogg" event="BossHelicopter">
+            <Function>Audio_ProcessBossSounds</Function>
+            <TriggerCondition>Helicopter boss appears</TriggerCondition>
+            <Looping>true</Looping>
+        </Sound>
+
+        <Sound file="bosslaser.ogg" event="BossLaser">
+            <Function>Audio_ProcessBossSounds</Function>
+            <TriggerCondition>Boss laser weapon</TriggerCondition>
+        </Sound>
+
+        <Sound file="bosslaserblast.ogg" event="BossLaserBlast">
+            <Function>Audio_ProcessBossSounds</Function>
+            <TriggerCondition>Boss laser impact</TriggerCondition>
+        </Sound>
+
+        <Sound file="bossblast.ogg" event="BossExplosion">
+            <Function>Audio_ProcessBossSounds</Function>
+            <TriggerCondition>Boss takes damage</TriggerCondition>
+        </Sound>
+
+        <Sound file="robotlaser.ogg" event="RobotBossLaser">
+            <Function>Audio_ProcessBossSounds</Function>
+            <TriggerCondition>Robot boss laser</TriggerCondition>
+        </Sound>
+
+        <Sound file="robotsmash.ogg" event="RobotSmash">
+            <Function>Audio_ProcessBossSounds</Function>
+            <TriggerCondition>Robot boss ground pound</TriggerCondition>
+        </Sound>
+
+        <Sound file="earthquake.ogg" event="BossEarthquake">
+            <Function>Audio_ProcessBossSounds</Function>
+            <TriggerCondition>Boss creates earthquake</TriggerCondition>
+        </Sound>
+
+        <Sound file="tractorbeam.ogg" event="TractorBeam">
+            <Function>Audio_ProcessBossSounds</Function>
+            <TriggerCondition>Boss tractor beam</TriggerCondition>
+            <Looping>true</Looping>
+        </Sound>
+
+        <Sound file="chain.ogg" event="ChainWeapon">
+            <Function>Audio_ProcessBossSounds</Function>
+            <TriggerCondition>Wrecker boss chain</TriggerCondition>
+        </Sound>
+    </SoundCategory>
+
+    <!-- Environmental/Ambient Sounds -->
+    <SoundCategory name="Environmental" priority="low">
+        <Sound file="airraid.ogg" event="AirRaidSiren">
+            <Function>Audio_ProcessEnvironmentalSounds</Function>
+            <TriggerCondition>Wave warning</TriggerCondition>
+        </Sound>
+
+        <Sound file="alert.ogg" event="DangerAlert">
+            <Function>Audio_ProcessEnvironmentalSounds</Function>
+            <TriggerCondition>Boss approaching</TriggerCondition>
+        </Sound>
+
+        <Sound file="sparking.ogg" event="ElectricalSpark">
+            <Function>Audio_ProcessEnvironmentalSounds</Function>
+            <TriggerCondition>Damage effect</TriggerCondition>
+            <Looping>true</Looping>
+        </Sound>
+
+        <Sound file="shorting.ogg" event="ElectricalShort">
+            <Function>Audio_ProcessEnvironmentalSounds</Function>
+            <TriggerCondition>System malfunction</TriggerCondition>
+        </Sound>
+
+        <Sound file="meteor.ogg" event="MeteorFall">
+            <Function>Audio_ProcessEnvironmentalSounds</Function>
+            <TriggerCondition>Meteor shower event</TriggerCondition>
+        </Sound>
+    </SoundCategory>
+
+    <!-- UI/Feedback Sounds -->
+    <SoundCategory name="UI" priority="low">
+        <Sound file="buttondown.ogg" event="ButtonPress">
+            <Function>Button_ClickHandlerSound</Function>
+            <Address>0x00420bf0</Address>
+            <TriggerCondition>UI button pressed</TriggerCondition>
+        </Sound>
+
+        <Sound file="buttonup.ogg" event="ButtonRelease">
+            <Function>Button_ClickHandlerSound</Function>
+            <TriggerCondition>UI button released</TriggerCondition>
+        </Sound>
+
+        <Sound file="denied.ogg" event="ActionDenied">
+            <Function>Audio_PlaySoundEffect</Function>
+            <TriggerCondition>Invalid action attempted</TriggerCondition>
+        </Sound>
+
+        <Sound file="statbeep.ogg" event="StatUpdate">
+            <Function>Audio_PlaySoundEffect</Function>
+            <TriggerCondition>Score/stat change</TriggerCondition>
+        </Sound>
+
+        <Sound file="stats.ogg" event="StatsScreen">
+            <Function>Audio_PlaySoundEffect</Function>
+            <TriggerCondition>Stats screen shown</TriggerCondition>
+        </Sound>
+
+        <Sound file="upgrade.ogg" event="WeaponUpgrade">
+            <Function>WeaponUpgrade_PlaySoundEffect</Function>
+            <Address>0x0042fd80</Address>
+            <TriggerCondition>Weapon upgraded in shop</TriggerCondition>
+        </Sound>
+
+        <Sound file="mapover.ogg" event="MapHover">
+            <Function>Audio_PlaySoundEffect</Function>
+            <TriggerCondition>Hovering over map region</TriggerCondition>
+        </Sound>
+    </SoundCategory>
+
+    <!-- Friendly/Ally Sounds -->
+    <SoundCategory name="Allies" priority="medium">
+        <Sound file="pupcopter.ogg" event="AllyHelicopter">
+            <Function>Audio_ProcessEnvironmentalSounds</Function>
+            <TriggerCondition>Ally helicopter appears</TriggerCondition>
+            <Looping>true</Looping>
+        </Sound>
+
+        <Sound file="friendly1.ogg" event="AllyChatter1">
+            <Function>Audio_ProcessEnvironmentalSounds</Function>
+            <TriggerCondition>Ally radio chatter</TriggerCondition>
+        </Sound>
+
+        <Sound file="friendly2.ogg" event="AllyChatter2">
+            <Function>Audio_ProcessEnvironmentalSounds</Function>
+            <TriggerCondition>Ally radio chatter</TriggerCondition>
+        </Sound>
+
+        <Sound file="friendly3.ogg" event="AllyChatter3">
+            <Function>Audio_ProcessEnvironmentalSounds</Function>
+            <TriggerCondition>Ally radio chatter</TriggerCondition>
+        </Sound>
+
+        <Sound file="friendlydie.ogg" event="AllyDestroyed">
+            <Function>Sound_PlayExplosion</Function>
+            <TriggerCondition>Ally helicopter destroyed</TriggerCondition>
+        </Sound>
+
+        <Sound file="reinforcements.ogg" event="Reinforcements">
+            <Function>Audio_ProcessEnvironmentalSounds</Function>
+            <TriggerCondition>Reinforcements arriving</TriggerCondition>
+        </Sound>
+    </SoundCategory>
+
+    <!-- Voice/Announcer Sounds -->
+    <SoundCategory name="Voice" priority="high">
+        <Sound file="v_getready.ogg" event="GetReady">
+            <Function>Audio_PlaySoundEffect</Function>
+            <TriggerCondition>Level start countdown</TriggerCondition>
+        </Sound>
+
+        <Sound file="v_prepare.ogg" event="Prepare">
+            <Function>Audio_PlaySoundEffect</Function>
+            <TriggerCondition>Boss warning</TriggerCondition>
+        </Sound>
+
+        <Sound file="v_danger.ogg" event="Danger">
+            <Function>Audio_PlaySoundEffect</Function>
+            <TriggerCondition>Critical danger warning</TriggerCondition>
+        </Sound>
+
+        <Sound file="v_levelcomplete.ogg" event="LevelComplete">
+            <Function>Audio_PlaySoundEffect</Function>
+            <TriggerCondition>Level completion</TriggerCondition>
+        </Sound>
+
+        <Sound file="v_gameover.ogg" event="GameOver">
+            <Function>Audio_PlaySoundEffect</Function>
+            <TriggerCondition>Player defeated</TriggerCondition>
+        </Sound>
+
+        <Sound file="v_megalaser.ogg" event="MegaLaserVoice">
+            <Function>Audio_ProcessPowerUpSounds</Function>
+            <TriggerCondition>Mega laser announcement</TriggerCondition>
+        </Sound>
+
+        <Sound file="v_atomictank.ogg" event="AtomicTank">
+            <Function>Audio_PlaySoundEffect</Function>
+            <TriggerCondition>Special tank announcement</TriggerCondition>
+        </Sound>
+
+        <Sound file="v_waffle.ogg" event="EasterEgg">
+            <Function>Audio_PlaySoundEffect</Function>
+            <TriggerCondition>Easter egg/secret</TriggerCondition>
+        </Sound>
+    </SoundCategory>
+
+    <!-- Impact/Hit Sounds -->
+    <SoundCategory name="Impacts" priority="medium">
+        <Sound file="bullethit.ogg" event="BulletHit">
+            <Function>Collision_HandleBulletHit</Function>
+            <Address>0x00497700</Address>
+            <TriggerCondition>Bullet hits target</TriggerCondition>
+        </Sound>
+
+        <Sound file="orbhit.ogg" event="OrbHit">
+            <Function>Audio_ProcessWeaponSounds</Function>
+            <TriggerCondition>Defense orb impact</TriggerCondition>
+        </Sound>
+
+        <Sound file="statichit.ogg" event="StaticHit">
+            <Function>Audio_ProcessWeaponSounds</Function>
+            <TriggerCondition>Static weapon hit</TriggerCondition>
+        </Sound>
+
+        <Sound file="bigthud.ogg" event="HeavyImpact">
+            <Function>Audio_ProcessExplosionSounds</Function>
+            <TriggerCondition>Heavy object impact</TriggerCondition>
+        </Sound>
+
+        <Sound file="starsmash.ogg" event="StarSmash">
+            <Function>Audio_ProcessExplosionSounds</Function>
+            <TriggerCondition>Star projectile impact</TriggerCondition>
+        </Sound>
+    </SoundCategory>
+
+    <!-- Special Weapon Sounds -->
+    <SoundCategory name="SpecialWeapons" priority="high">
+        <Sound file="energyfire.ogg" event="EnergyWeapon">
+            <Function>Audio_ProcessWeaponSounds</Function>
+            <TriggerCondition>Energy weapon fire</TriggerCondition>
+        </Sound>
+
+        <Sound file="staticshot.ogg" event="StaticShot">
+            <Function>Audio_ProcessWeaponSounds</Function>
+            <TriggerCondition>Static cannon fire</TriggerCondition>
+        </Sound>
+
+        <Sound file="boltcharge.ogg" event="BoltCharge">
+            <Function>Audio_ProcessWeaponSounds</Function>
+            <TriggerCondition>Lightning bolt charging</TriggerCondition>
+        </Sound>
+
+        <Sound file="star.ogg" event="StarProjectile">
+            <Function>Audio_ProcessWeaponSounds</Function>
+            <TriggerCondition>Star weapon launch</TriggerCondition>
+        </Sound>
+    </SoundCategory>
+
+    <!-- Satellite Sequence Sounds -->
+    <SoundCategory name="Satellite" priority="medium">
+        <Sound file="sat1.ogg" event="SatellitePhase1">
+            <Function>Audio_ProcessEnemySounds</Function>
+            <TriggerCondition>Satellite sequence 1</TriggerCondition>
+        </Sound>
+
+        <Sound file="sat2.ogg" event="SatellitePhase2">
+            <Function>Audio_ProcessEnemySounds</Function>
+            <TriggerCondition>Satellite sequence 2</TriggerCondition>
+        </Sound>
+
+        <Sound file="sat3.ogg" event="SatellitePhase3">
+            <Function>Audio_ProcessEnemySounds</Function>
+            <TriggerCondition>Satellite sequence 3</TriggerCondition>
+        </Sound>
+
+        <Sound file="sat4.ogg" event="SatellitePhase4">
+            <Function>Audio_ProcessEnemySounds</Function>
+            <TriggerCondition>Satellite sequence 4</TriggerCondition>
+        </Sound>
+
+        <Sound file="sat5.ogg" event="SatellitePhase5">
+            <Function>Audio_ProcessEnemySounds</Function>
+            <TriggerCondition>Satellite sequence 5</TriggerCondition>
+        </Sound>
+
+        <Sound file="sat6.ogg" event="SatellitePhase6">
+            <Function>Audio_ProcessEnemySounds</Function>
+            <TriggerCondition>Satellite sequence 6</TriggerCondition>
+        </Sound>
+
+        <Sound file="sat7.ogg" event="SatellitePhase7">
+            <Function>Audio_ProcessEnemySounds</Function>
+            <TriggerCondition>Satellite sequence 7</TriggerCondition>
+        </Sound>
+    </SoundCategory>
+
+    <!-- Music -->
+    <SoundCategory name="Music" priority="low">
+        <Sound file="../Music/LoveTheme.ogg" event="MainTheme">
+            <Function>Sound_PlayBackgroundMusic</Function>
+            <Reference>GameInitialization_LoadUserDataAndAssets.c:418</Reference>
+            <TriggerCondition>Menu/title screen</TriggerCondition>
+            <Looping>true</Looping>
+        </Sound>
+    </SoundCategory>
+
+    <!-- Miscellaneous Sounds -->
+    <SoundCategory name="Misc" priority="low">
+        <Sound file="Swoosh.ogg" event="Swoosh">
+            <Function>Audio_PlaySoundEffect</Function>
+            <TriggerCondition>Fast movement/transition</TriggerCondition>
+        </Sound>
+
+        <Sound file="airbrake.ogg" event="AirBrake">
+            <Function>Audio_ProcessEnemySounds</Function>
+            <TriggerCondition>Aircraft slowing down</TriggerCondition>
+        </Sound>
+
+        <Sound file="longkey.ogg" event="LongKeyPress">
+            <Function>Audio_PlaySoundEffect</Function>
+            <TriggerCondition>Long key press detected</TriggerCondition>
+        </Sound>
+
+        <Sound file="shortkey.ogg" event="ShortKeyPress">
+            <Function>Audio_PlaySoundEffect</Function>
+            <TriggerCondition>Short key press detected</TriggerCondition>
+        </Sound>
+
+        <Sound file="megaup1.ogg" event="MegaUpgrade1">
+            <Function>Audio_ProcessPowerUpSounds</Function>
+            <TriggerCondition>Mega upgrade sequence 1</TriggerCondition>
+        </Sound>
+
+        <Sound file="megaup2.ogg" event="MegaUpgrade2">
+            <Function>Audio_ProcessPowerUpSounds</Function>
+            <TriggerCondition>Mega upgrade sequence 2</TriggerCondition>
+        </Sound>
+
+        <Sound file="megaup3.ogg" event="MegaUpgrade3">
+            <Function>Audio_ProcessPowerUpSounds</Function>
+            <TriggerCondition>Mega upgrade sequence 3</TriggerCondition>
+        </Sound>
+
+        <Sound file="megaup4.ogg" event="MegaUpgrade4">
+            <Function>Audio_ProcessPowerUpSounds</Function>
+            <TriggerCondition>Mega upgrade sequence 4</TriggerCondition>
+        </Sound>
+    </SoundCategory>
+</SoundSystemDatabase>

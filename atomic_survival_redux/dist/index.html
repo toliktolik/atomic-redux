@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atomic Survival Redux</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #000;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Arial', sans-serif;
+        }
+
+        #loading {
+            position: absolute;
+            color: #00ff00;
+            font-size: 32px;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 255, 0, 0.5);
+            animation: pulse 1s ease-in-out infinite;
+            letter-spacing: 2px;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        canvas {
+            display: block;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+        }
+
+        /* Hide cursor over game canvas */
+        canvas:hover {
+            cursor: crosshair;
+        }
+
+        /* Performance stats (optional) */
+        #stats {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: #00ff00;
+            font-size: 12px;
+            font-family: monospace;
+            pointer-events: none;
+            display: none;
+        }
+
+        /* Fullscreen button */
+        #fullscreen {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 10px 20px;
+            background: rgba(0, 255, 0, 0.2);
+            border: 2px solid #00ff00;
+            color: #00ff00;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        #fullscreen:hover {
+            background: rgba(0, 255, 0, 0.4);
+            transform: scale(1.05);
+        }
+    </style>
+  <script type="module" crossorigin src="./assets/index-rANtUddn.js"></script>
+  <link rel="modulepreload" crossorigin href="./assets/pixi-TAq7lLPH.js">
+  <link rel="modulepreload" crossorigin href="./assets/audio-BOAiFGDG.js">
+</head>
+<body>
+    <div id="loading" style="display: none;">LOADING...</div>
+    <div id="stats"></div>
+    <button id="fullscreen" style="display: none;">FULLSCREEN</button>
+
+
+    <script>
+        // Fullscreen support
+        document.addEventListener('DOMContentLoaded', () => {
+            const fullscreenBtn = document.getElementById('fullscreen');
+
+            // Show fullscreen button after game loads
+            setTimeout(() => {
+                if (fullscreenBtn) {
+                    fullscreenBtn.style.display = 'block';
+                }
+            }, 3000);
+
+            if (fullscreenBtn) {
+                fullscreenBtn.addEventListener('click', () => {
+                    if (!document.fullscreenElement) {
+                        document.documentElement.requestFullscreen().catch(err => {
+                            console.log('Fullscreen error:', err);
+                        });
+                    } else {
+                        document.exitFullscreen();
+                    }
+                });
+            }
+        });
+
+        // Optional: Show FPS counter
+        if (window.location.search.includes('debug')) {
+            const stats = document.getElementById('stats');
+            if (stats) {
+                stats.style.display = 'block';
+                let lastTime = performance.now();
+                let frames = 0;
+
+                function updateStats() {
+                    frames++;
+                    const currentTime = performance.now();
+
+                    if (currentTime >= lastTime + 1000) {
+                        stats.textContent = `FPS: ${frames}`;
+                        frames = 0;
+                        lastTime = currentTime;
+                    }
+
+                    requestAnimationFrame(updateStats);
+                }
+
+                updateStats();
+            }
+        }
+    </script>
+</body>
+</html>
